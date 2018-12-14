@@ -1,23 +1,57 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <particles-j-s class = "particle1"/>
     <router-view/>
   </div>
 </template>
 
+<script>
+import particlesJS from './components/particlesJS.vue'
+import AOS from 'aos'
+
+export default{
+  components:{
+    particlesJS
+  },
+  created(){
+    AOS.init({  duration: 1000,
+    mirror:true});
+  }
+}
+</script>
+
 <style lang="scss">
+
+@font-face { 
+  font-family: 'Swagger'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/Swagger.woff') 
+  format('woff');
+   font-weight: normal; 
+   font-style: normal; 
+   }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Swagger';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+    background-origin: content-box;
+  color: #ffffff;
+    overflow-x: hidden;
+    margin: -3%;
 }
+body {
+    background-color: #f01d00;
+
+}
+.particle1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+
 #nav {
-  padding: 30px;
+  padding: 0px;
   a {
     font-weight: bold;
     color: #2c3e50;
