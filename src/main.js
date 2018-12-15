@@ -16,4 +16,4 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-Vue.use(VueScrollTo)
+Vue.use(VueScrollTo,{easing: "linear"})

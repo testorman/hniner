@@ -3,13 +3,18 @@
   <div @touchmove="prevent" ><h1>about</h1>
     <button v-scroll-to="{ 
           el: '#element',
-          duration: 20000
+          duration: 2000000
       }" v-on:click = "btnClick">
       Scroll to #element
   </button>
-  <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" data-aos = "fade-right">
-    {{TransitionData[0]}}
-  </div>
+    <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" v-bind:data-aos = "TransitionData[index%6]">
+     {{HninerData[index].contents}}
+   </div>
+
+   <button id = "element">
+
+     end
+   </button>
 
 
   
@@ -59,12 +64,11 @@ export default {
   box-sizing: border-box;
 }
 .item {
-  width: 200px;
+  width: 300px;
   height: 200px;
   margin: 50px auto;
   padding-top: 75px;
-  background: #ccc;
-  text-align: center;
+   text-align: center;
   color: #FFF;
   font-size: 3em;
 }
