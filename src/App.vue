@@ -14,7 +14,7 @@ export default{
     particlesJS
   },
   created(){
-    AOS.init({  duration: 1000,
+    AOS.init({  duration: 3000,
     mirror:true});
   }
 }

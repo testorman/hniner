@@ -1,38 +1,22 @@
 
 <template>
-  <div @touchmove="prevent" ><h1>about</h1>
-    <button v-scroll-to="{ 
+  <div @touchmove="prevent" >
+    <!-- <button v-scroll-to="{ 
           el: '#element',
           duration: 2000000
-      }" v-on:click = "btnClick">
+      }">
       Scroll to #element
-  </button>
-    <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" v-bind:data-aos = "TransitionData[index%6]">
-     {{HninerData[index].contents}}
+  </button> -->
+    <div class="marginSpace"></div>
+    <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" v-bind:data-aos = "TransitionData[index%6]" data-aos-anchor-placement="top-center">
+      <div class = "nameText"> {{HninerData[index].name + "님"}}</div>
+      <p/>
+      <div class = "contentsText"> {{HninerData[index].contents}}</div>
    </div>
 
    <button id = "element">
-
      end
    </button>
-
-
-  
-<!-- <div class="item" data-aos="fade-up"  data-aos-anchor-placement="center-center"> >1</div>
-<div class="item" data-aos="fade-down"  data-aos-anchor-placement="center-center"> >2</div>
-<div class="item" data-aos="fade-right"  data-aos-anchor-placement="center-center"> >3</div>
-<div class="item" data-aos="fade-left"  data-aos-anchor-placement="center-center"> >4</div>
-
-<div class="item" data-aos="zoom-in"  data-aos-anchor-placement="center-center"> >5</div>
-<div class="item" data-aos="zoom-out"  data-aos-anchor-placement="center-center"> >6</div>
-
-<div class="item" data-aos="slide-up">7</div>
-
-<div class="item" data-aos="flip-up">8</div>
-<div class="item" data-aos="flip-down">9</div>
-<div class="item" data-aos="flip-right">10</div>
-<div class="item" data-aos="flip-left" id="element">11</div> -->
-  
   </div>
 </template>
 
@@ -54,7 +38,14 @@ export default {
     },
     btnClick(){
       console.log(HninerData)
+    },
+    scrollStart(){
+
     }
+  },
+  mounted() {
+    const VueScrollTo = require('vue-scrollto');
+    VueScrollTo.scrollTo('#element', 2000000)
   }
 }
 </script>
@@ -63,14 +54,24 @@ export default {
 * {
   box-sizing: border-box;
 }
+.marginSpace{
+  width: 100%;
+  height: 500px;
+}
 .item {
   width: 300px;
   height: 200px;
   margin: 50px auto;
-  padding-top: 75px;
-   text-align: center;
+  padding-top: 175px;
+  text-align: left;
   color: #FFF;
-  font-size: 3em;
+}
+.nameText{
+  font-size: 1em
+
+}
+.contentsText{
+  font-size: 2em
 }
 
 </style>
