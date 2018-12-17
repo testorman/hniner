@@ -2,26 +2,21 @@
 
 <div class="winner" @touchmove="prevent" >
   <div class="img-box">
-    <transition>
-      <img class = "logo" v-show="isLoad" v-bind:src = "item.icon" @load="loaded" />
-    </transition>
+      <img class = "logo item" v-show="isLoad" v-bind:src = "item.icon" @load="loaded" data-aos = "zoom-in-up" />
   </div>
-  <div class="row1">
-    <div class="header-box">
-     <transition>
-        <div class="mainHeader" v-show="isLoad" v-html = "item.eng"/>
-     </transition>
-    </div>
-    <div class="textContainer1" v-show="isLoad" >
-      <h3 v-html = "item.description"/>
-      <b-k-ani class = "winnerName"
-      :msg = "item.winner"
+  <div class="mainHeader" v-show="isLoad" v-html = "item.eng"/>
+  <div class="space0"/>
+  <div class = "textContents" v-html = "item.description" data-aos = "zoom-in-up"/>
+  <b-k-ani class = "winnerName"
+      :msg = "item.winner" data-aos = "fade-up"
+       data-aos-delay="100"
+           data-aos-duration="7000"
+       data-aos-easing="ease-in-out"
+
       />
-      <div class="bottomText">
+  <div class="bottomText">
         ©2018
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
 </template>
 
@@ -97,12 +92,10 @@ export default {
 .img-box{
   img {
       transition: all 0.7s ease;
-      padding-top: 100px;
       margin: 0;
       overflow: hidden;
   }
   img.v-enter, img.v-leave {
-      padding-top: 200px;
       opacity: 0;
   }
 }
@@ -125,6 +118,10 @@ h3{
   width: 100%;
   height: 100%;
 }
+.space0{
+  width: 100%;
+  height: 600px;
+}
 .row1 {
   padding-top: 40px;
   height: 260vh;
@@ -143,11 +140,14 @@ h3{
     line-height: 50px;
     letter-spacing :0.5px;
 }
-.textContainer1{
+.textContents{
+
+     padding-top: 40px;
 
     position:relative;
     bottom: -webkit-calc(-100% + 1050px);
     bottom:calc(-100% + 1050px);
+    word-break: keep-all;
 
     padding-left: 50px;
     padding-right: 50px;

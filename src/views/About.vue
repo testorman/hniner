@@ -1,22 +1,21 @@
 
 <template>
-  <div @touchmove="prevent" >
-    <!-- <button v-scroll-to="{ 
-          el: '#element',
-          duration: 2000000
-      }">
-      Scroll to #element
-  </button> -->
-    <div class="marginSpace"></div>
-    <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" v-bind:data-aos = "TransitionData[index%6]" data-aos-anchor-placement="top-center">
-      <div class = "nameText"> {{HninerData[index].name + "님"}}</div>
+  <div @touchmove="prevent" class = "scrollContainer" >
+    <div class="marginSpace" id = "top">
+       <div class="endText">모두 수고하셨습니다.</div>
+    </div>
+       <!-- <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index" v-bind:data-aos = "TransitionData[index%2]" data-aos-anchor-placement="center-center"> -->
+      <div class = "item" v-for = "(data, index) in HninerData" v-bind:key = "data.index">
+      <div class = "nameText"> {{HninerData[index].name + " 님"}}</div>
       <p/>
       <div class = "contentsText"> {{HninerData[index].contents}}</div>
    </div>
+  <div class="bottonMarginSpace">
 
-   <button id = "element">
-     end
-   </button>
+    <div class = "startBtn" @click="start">시작하기</div>
+
+  </div>
+
   </div>
 </template>
 
@@ -27,7 +26,7 @@ export default {
   data(){
     return{
       HninerData,
-      TransitionData: ["fade-up","fade-down","fade-right","fade-left","zoom-in","zoom-out"]
+      TransitionData: ["fade-up"]
     } 
   },
   methods:{
@@ -36,16 +35,30 @@ export default {
          event.preventDefault()
          event.stopPropagation()
     },
+    start(){
+         var VueScrollTo = require('vue-scrollto');
+         VueScrollTo.scrollTo('#top', 1000000);
+    },
     btnClick(){
       console.log(HninerData)
     },
     scrollStart(){
 
     }
+  },computed:{
+     startScroll(){
+         var VueScrollTo = require('vue-scrollto');
+         VueScrollTo.scrollTo('#top', 1000000);
+    },
+  },
+  beforeMount(){
   },
   mounted() {
-    const VueScrollTo = require('vue-scrollto');
-    VueScrollTo.scrollTo('#element', 2000000)
+     window.scrollTo(200, document.body.scrollHeight || document.documentElement.scrollHeight);
+     this.startScroll();
+  },
+  updated(){
+
   }
 }
 </script>
@@ -56,23 +69,39 @@ export default {
 }
 .marginSpace{
   width: 100%;
-  height: 500px;
+  height: 900px;
+}
+.endText{
+  margin-top: 350px;
+  font-size: 4em;
+}
+.bottonMarginSpace{
+  width: 100%;
+  height: 800px;
 }
 .item {
   width: 300px;
-  height: 200px;
+  height: 180px;
   margin: 50px auto;
-  padding-top: 175px;
-  text-align: left;
+  padding-top: 50px;
+  text-align: center;
   color: #FFF;
-}
+  }
 .nameText{
-  font-size: 1em
+  font-size: 1.5em
+
+}
+.startBtn{
+    padding-top: 14em;
+    font-size: 2em;
 
 }
 .contentsText{
-  font-size: 2em
+  font-size: 1.8em;
+  word-break: keep-all;
+
 }
+
 
 </style>
 
