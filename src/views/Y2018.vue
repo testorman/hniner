@@ -111,8 +111,7 @@ h3{
   height: 200vh;
 }
 .Y2018{
-  background-color: #f01d00;
-      overflow-x: hidden;
+        overflow-x: hidden;
 
 }
 .logo{

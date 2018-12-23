@@ -47,9 +47,9 @@ export default {
       isLoad:false,
       textLoad:false,
       item:{
-        title:"제목",
-        description:"내용",
-        winner:"김겨엉수",
+        title:"",
+        description:"",
+        winner:"",
         eng:"",
         icon:""
       }
@@ -57,7 +57,20 @@ export default {
   },
    methods:{
      getItems(){
-       let url = `https://h9winner.firebaseio.com/items/${this.$route.params.key}.json`
+
+       console.log(this.$route.params.key);
+
+       let url = ''
+       if (this.$route.params.key == undefined) {
+           url = `https://h9winner.firebaseio.com/items/greeting.json`
+
+
+       }else{
+           url = `https://h9winner.firebaseio.com/items/${this.$route.params.key}.json`
+       }
+       
+      console.log(url);
+       
        axios.get(url).then((res) => {
          this.item = res.data;
 
