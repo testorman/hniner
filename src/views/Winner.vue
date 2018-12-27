@@ -1,13 +1,16 @@
 <template>
 
 <div class="winner" @touchmove="prevent" >
+  <load-modal v-show="!isLoad" type = "test">
+  </load-modal>
+
   <div class="img-box">
       <img class = "logo item" v-show="isLoad" v-bind:src = "item.icon" @load="loaded" data-aos = "zoom-in-up" />
   </div>
   <div class="mainHeader" v-show="isLoad" v-html = "item.eng"/>
   <div class="space0"/>
-  <div class = "textContents" v-html = "item.description" data-aos = "zoom-in-up"/>
-  <b-k-ani class = "winnerName"
+  <div class = "textContents" v-show="isLoad" v-html = "item.description" data-aos = "zoom-in-up"/>
+  <b-k-ani class = "winnerName" v-show="isLoad" 
       :msg = "item.winner" data-aos = "fade-up"
        data-aos-delay="100"
            data-aos-duration="7000"
@@ -27,6 +30,7 @@ import Modal from '../components/Modal.vue';
 import axios from 'axios';
 import particlesJS from '../components/particlesJS.vue'
 import BKAni from '../components/BracketAnimation.vue'
+import LoadModal from '../components/LoaderModal.vue'
 
 
 export default {
@@ -36,7 +40,8 @@ export default {
           VueFlux,
           FluxParallax,
           Modal,
-          BKAni
+          BKAni,
+          LoadModal
   },
   data () {
     return {
@@ -91,6 +96,7 @@ export default {
     }
    },
    mounted(){
+         window.history.scrollRestoration = 'manual';
      this.showModal = !this.showModal;
 
     //this.showDynamicComponentModal()
@@ -164,11 +170,15 @@ h3{
 
     padding-left: 50px;
     padding-right: 50px;
-    text-align: left;
+    text-align: center;
+    align-content: center;
 
 }
 .winnerName{
     padding-top: 100px; 
+}
+.bottomText{
+  margin-bottom: 20px;
 }
 
 

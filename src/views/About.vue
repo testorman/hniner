@@ -1,6 +1,8 @@
 
 <template>
   <div @touchmove="prevent" class = "scrollContainer" >
+     <load-modal type = "start" @startScroll = "start" v-show="this.modalShow">
+    </load-modal> 
     <div class="marginSpace" id = "top">
        <div class="endText">모두 수고하셨습니다.</div>
     </div>
@@ -9,10 +11,9 @@
       <div class = "nameText"> {{HninerData[index].name + " 님"}}</div>
       <p/>
       <div class = "contentsText"> {{HninerData[index].contents}}</div>
+      <div class="marginSpace2">  </div>
    </div>
   <div class="bottonMarginSpace">
-
-    <div class = "startBtn" @click="start">시작하기</div>
 
   </div>
 
@@ -21,12 +22,18 @@
 
 <script>
 import HninerData from '../assets/json/hnineofweek.json';
+import LoadModal from '../components/LoaderModal.vue';
+
 
 export default {
+    components: {
+      LoadModal
+    },
   data(){
     return{
       HninerData,
-      TransitionData: ["fade-up"]
+      TransitionData: ["fade-up"],
+      modalShow: true
     } 
   },
   methods:{
@@ -36,8 +43,14 @@ export default {
          event.stopPropagation()
     },
     start(){
+
+         this.modalShow = false
          var VueScrollTo = require('vue-scrollto');
+       //  VueScrollTo.scrollTo('#top', 100000);
+
          VueScrollTo.scrollTo('#top', 1000000);
+         console.log("startx")
+
     },
     btnClick(){
       console.log(HninerData)
@@ -45,21 +58,26 @@ export default {
     scrollStart(){
 
     }
-  },computed:{
-     startScroll(){
-         var VueScrollTo = require('vue-scrollto');
-         VueScrollTo.scrollTo('#top', 1000000);
-    },
-  },
-  beforeMount(){
+  },created(){
+    window.scrollTo(200, document.body.scrollHeight || document.documentElement.scrollHeight);
+
   },
   mounted() {
-     window.scrollTo(200, document.body.scrollHeight || document.documentElement.scrollHeight);
-     this.startScroll();
-  },
-  updated(){
 
-  }
+    window.history.scrollRestoration = 'manual';
+  
+
+    var shuffle = require('shuffle-array');
+    
+    var db = HninerData;
+    shuffle(HninerData);
+ 
+    console.log(HninerData);
+
+    document.documentElement.style.overflow = 'hidden'
+    window.scrollTo(200, document.body.scrollHeight || document.documentElement.scrollHeight);
+  },
+
 }
 </script>
 
@@ -68,8 +86,11 @@ export default {
   box-sizing: border-box;
 }
 .marginSpace{
+      padding-top: 200px;
+  //  padding-bottom: 350px;
+
   width: 100%;
-  height: 900px;
+  height: 800px;
 }
 .endText{
   margin-top: 350px;
@@ -80,16 +101,22 @@ export default {
   height: 800px;
 }
 .item {
-  width: 300px;
+  width: 100%;
   height: 180px;
-  margin: 50px auto;
   padding-top: 50px;
+  margin-bottom: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
   color: #FFF;
   }
 .nameText{
   font-size: 1.5em
 
+}
+.marginSpace2{
+  width: 300px;
+  height: 300px;
 }
 .startBtn{
     padding-top: 14em;

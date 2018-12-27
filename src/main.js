@@ -5,6 +5,7 @@ import store from './store'
 import VModal from 'vue-js-modal'
 import 'aos/dist/aos.css'
 import VueScrollTo from 'vue-scrollto'
+import Spinner from 'vue-spinkit'
 
 
 
@@ -17,3 +18,4 @@ new Vue({
 }).$mount('#app')
 
 Vue.use(VueScrollTo,{easing: "linear"})
+Vue.component('Spinners', Spinner)
